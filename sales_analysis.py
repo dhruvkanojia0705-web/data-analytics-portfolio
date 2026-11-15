@@ -8,17 +8,23 @@ df = pd.read_csv("sales.csv")
 # Calculate business KPIs
 total_sales = df["Sales"].sum()
 total_quantity = df["Quantity"].sum()
-average_sales = df["Sales"].sum()
+average_sales = df["Sales"].mean()
 
-print ("SALES PERFORMANCE REPORT")
-print ("------------------------")
-print ("Total Revenue: Rs.", total_sales)
-print ("Total Quantity:", total_quantity)
-print ("Average Sales: Rs.", average_sales)
+print("\nSALES PERFORMANCE REPORT")
+print("------------------------")
+print("Total Revenue: Rs.", total_sales)
+print("Total Quantity:", total_quantity)
+print("Average Sales: Rs.", round(average_sales, 2))
+
+# Sales by category
+category_sales = df.groupby("Category")["Sales"].sum()
+
+print("\nRevenue by Category:")
+print(category_sales)
 
 # Sales by product
-print ("\nSales by Product:")
-print (df[["Product", "Sales"]])
+print("\nSales by Product:")
+print(df[["Product", "Sales"]])
 
 # Create chart
 plt.figure(figsize=(9, 5))
@@ -32,4 +38,4 @@ plt.tight_layout()
 plt.savefig("sales_dashboard.png")
 plt.close()
 
-print("\nDashboard created successfully! ")
+print("\nDashboard created successfully!")
